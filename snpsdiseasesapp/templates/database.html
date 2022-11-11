@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+    {% block content %}
+        <main>
+             <!-- Tab links -->
+                
+            <section class="hero text-center">
+            <h1>COMPLETE DATABASE</h1>   
+            <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'Snp2Phenotype2Ref')"  id="defaultOpen">Snp2Phenotype2Ref</button>
+                    <button class="tablinks" onclick="openTab(event, 'Snp')">SNPs</button>
+                    <button class="tablinks" onclick="openTab(event, 'Reference')">Reference</button>
+                    <button class="tablinks" onclick="openTab(event, 'DiseaseTrait')">DiseaseTrait</button>
+                    <button class="tablinks" onclick="openTab(event, 'Genes')">Genes</button>
+                </div>
+                
+                <!-- Tab content -->
+                <div id="Snp2Phenotype2Ref" class="tabcontent">
+                    <h2>Snp2Phenotype2Ref</h2>
+                    <hr>
+                    <table class = display id="Snp2Phenotype2Ref-table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>snp_id</th>
+                                <th>disease_trait_id</th>
+                                <th>reference_id</th>
+                                <th>pvalue</th>
+                                <th>neg_log10_pvalue</th>
+                                <th>comment</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            $('#Snp2Phenotype2Ref-table').dataTable({
+                                
+                                serverSide: true,
+                                sAjaxSource: "http://127.0.0.1:8000/database/Snp2Phenotype2Ref",  // new url
+                                                    columns: [
+                                                        {name: "id", data: 0},
+                                                        {name: "snp_id", data: 1},
+                                                        {name: "disease_trait_id", data: 2},
+                                                        {name: "reference_id", data: 3},
+                                                        {name: "pvalue", data: 4},
+                                                        {name: "neg_log10_pvalue", data: 5},
+                                                        {name: "comment", data: 6},
+                                                        
+                                                    ],
+                                                    "searching": false
+                            });
+                        });
+                    </script>
+
+                </div>
+                
+                <div id="Snp" class="tabcontent">
+                    <h2>SNPs</h2>
+                    <hr>
+                    <table class = display id="Snp-table">
+                        <thead>
+                            <tr>
+                                <th>Rsid</th>
+                                <th>Chrom</th>
+                                <th>Chrom_pos</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            $('#Snp-table').dataTable({
+                                
+                                serverSide: true,
+                                sAjaxSource: "http://127.0.0.1:8000/database/Snp",  // new url
+                                                    columns: [
+                                                        {name: "rsid", data: 0},
+                                                        {name: "Chrom", data: 1},
+                                                        {name: "Chrom_pos", data: 2},
+                                                    ],
+                                                    "searching": false
+                            });
+                        });
+                    </script>
+                </div>
+                
+                <div id="Reference" class="tabcontent">
+                    <h2>References</h2>
+                    <hr>
+                    <table class = display id="Reference-table">
+                        <thead>
+                            <tr>
+                                <th>pubmedid</th>
+                                <th>journal</th>
+                                <th>title</th>
+                                <th>date</th>
+                                <th>link</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            $('#Reference-table').dataTable({
+                                
+                                serverSide: true,
+                                sAjaxSource: "http://127.0.0.1:8000/database/Reference",  // new url
+                                                    columns: [
+                                                        {name: "pubmedid", data: 0},
+                                                        {name: "journal", data: 1},
+                                                        {name: "title", data: 2},
+                                                        {name: "date", data: 3},
+                                                        {name: "link", data: 4},
+                                                    ],
+                                                    "searching": false
+                            });
+                        });
+                    </script>
+                </div>
+
+                <div id="DiseaseTrait" class="tabcontent">
+                    <h2>DiseaseTrait</h2>
+                    <hr>
+                    <table class = display id="DiseaseTrait-table">
+                        <thead>
+                            <tr>
+                                <th>Disease names</th>             
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            $('#DiseaseTrait-table').dataTable({
+                                
+                                serverSide: true,
+                                sAjaxSource: "http://127.0.0.1:8000/database/DiseaseTrait",  // new url
+                                                    columns: [
+                                                        {name: "names", data: 0},
+                                                    ],
+                                                    "searching": false
+                            });
+                        });
+                    </script>
+                </div>
+            
+                <div id="Genes" class="tabcontent">
+                    <h2>Genes</h2>
+                    <hr>
+                    <table class = display id="Genes-table">
+                        <thead>
+                            <tr>
+                                <th>Genes names</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+                    <script language="javascript">
+                        $(document).ready(function () {
+                            $('#Genes-table').dataTable({
+                                
+                                serverSide: true,
+                                sAjaxSource: "http://127.0.0.1:8000/database/Genes",  // new url
+                                                    columns: [
+                                                        {name: "names", data: 0},
+                                                    ],
+                                                    "searching": false
+                            });
+                        });
+                    </script>
+                </div>
+
+             <script>
+                function openTab(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the button that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+                }
+             </script>
+            <script>
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            </script>   
+                 
+
+            </section>
+        </main>
+    {% endblock %}

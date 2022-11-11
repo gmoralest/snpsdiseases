@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+    {% block content %}
+    <main>
+        <section class="hero text-light text-center">
+            <div class="container-sm">
+                <div class="hero-inner">
+                    <h1 class="hero-title h2-mobile mt-0 is-revealing">Gene search (BETA)</h1>
+                    <p class="hero-paragraph is-revealing">Bioinformatics tool to explore an SNPs Database.</p>
+                    <div class="feature-extended-image is-revealing">
+    <form>
+      <label for="gene">Product</label>
+      <input type="text" name="gene" id="gene">
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $(function () {
+            $("#gene").autocomplete({
+                minLength: 4,
+                source: '{% url 'autocomplete_gene' %}'
+            });
+        });
+      </script>
+        
+        <section class="hero text-center">
+            <h1>Items</h1>
+            <hr>
+            <table class = display id="items-table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>snp_id</th>
+                        <th>disease_trait_id</th>
+                        <th>reference_id</th>
+                        <th>pvalue</th>
+                        <th>neg_log10_pvalue</th>
+                        <th>comment</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script language="javascript">
+                $(document).ready(function () {
+                    $('#items-table').dataTable({
+                        serverSide: true,
+                        sAjaxSource: "http://127.0.0.1:8000/data/",  // new url
+                                            columns: [
+                                                {name: "id", data: 0},
+                                                {name: "snp_id", data: 1},
+                                                {name: "disease_trait_id", data: 2},
+                                                {name: "reference_id", data: 3},
+                                                {name: "pvalue", data: 4},
+                                                {name: "neg_log10_pvalue", data: 5},
+                                                {name: "comment", data: 6},
+                                                
+                                            ],
+                    });
+                });
+            </script>
+        </section>
+       
+        </main>
+    {% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+  <main>
+    <section class="hero text-light text-center">
+        <div class="container-sm">
+            <div class="hero-inner">
+                <h1 class="hero-title h2-mobile mt-0 is-revealing">SNP search</h1>
+                <p class="hero-paragraph is-revealing">Bioinformatics tool to explore an SNPs Database.</p>
+                <div class="feature-extended-image is-revealing">
+
+
+<form id = "SnpForm" class = "form" action="homepage/Snpsearchresults/" method="GET">
+    {% csrf_token %}
+<div>
+<label for="snp">Enter an Snp RSID</label>
+  <input type="text" name="snp" id="snp" value= '{% if submitbutton == "Submit" %} {{ snp }} {% endif %}'/>
+</div> 
+<div>
+<label for="snp">Enter a Chromosome number</label>
+<input type="text" name="chrom" id="chrom" value= '{% if submitbutton == "Submit" %} {{ chrom }} {% endif %}'/>
+</div> 
+<div>
+<label for="snp">Enter a Chromosome position</label>
+<input type="text" name="chrom_pos" id="chrom_pos" value= '{% if submitbutton == "Submit" %} {{ snp }} {% endif %}'/>
+</div> 
+<button type = "submit">submit</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $(function () {
+        $("#snp").autocomplete({
+            minLength: 4,
+            source: '{% url 'autocomplete_snp' %}'
+            
+        });
+    });
+  </script>
+   
+    </main>
+{% endblock %}

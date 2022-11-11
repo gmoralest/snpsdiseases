@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <main>
+    <section class="hero text-light text-center">
+        <div class="container-sm">
+            <div class="hero-inner">
+                <h1 class="hero-title h2-mobile mt-0 is-revealing">Disease search</h1>
+                <p class="hero-paragraph is-revealing">Bioinformatics tool to explore an SNPs Database.</p>
+                <div class="feature-extended-image is-revealing">
+<form id = "diseaseForm" class = "form" action="homepage/diseasesearchresults/" method="GET">
+{% csrf_token %}
+  
+<label for="disease">Enter a disease </label>
+  <input type="text" name="disease" id="disease" value= '{% if submitbutton == "Submit" %} {{ disease }} {% endif %}'/>
+  <button type = "submit">submit</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $(function () {
+        $("#disease").autocomplete({
+            minLength: 2,
+            source: '{% url 'autocomplete_diseases' %}'
+        });
+    });
+
+  </script>
+
+</section>
+
+</main>
+{% endblock %}
+
