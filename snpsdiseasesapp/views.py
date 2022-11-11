@@ -35,6 +35,7 @@ def snp_search_result(request,):
     print(chrom)
     print(chrom_pos)
     #### VER COMO FILTRAR LAS QUERY QUE NO TIENEN RESULTADOS ####
+    
     queryset = list(Snp2Phenotype2Ref.objects.filter(snp_id = snp).values_list('id', 'snp_id', 'disease_trait_id','reference_id','pvalue','neg_log10_pvalue','comment'))
     #t_queryset = list(zip(*queryset))
     columns = ['id', 'snp_id', 'disease_trait_id','reference_id','pvalue','neg_log10_pvalue','comment']
@@ -63,11 +64,6 @@ def disease_search_result(request,):
     context["data"] = queryset
     context["columns"] = columns
     return render(request, 'diseasesearchresult.html', context = context)
-
-
-
-
-
 
 
 
