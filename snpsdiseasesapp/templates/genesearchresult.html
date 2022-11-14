@@ -6,17 +6,17 @@
     <section class="hero text-center">
         {% if user.is_authenticated %}
         <a href="#" onclick="history.go(-1)"style="font-size:160%;color:white;">New Search</a>
-        <h1> {{ gene }}</h1>
+        <h1 style="color:white;"> {{ gene }}</h1>
     <hr>
     <table id="items-table" class="table table-striped table-bordered" style="width:70%">
         <thead>
             <tr>
-                <th>RSID</th>
-                <th>DISEASE TRAIT</th>
-                <th>GENES</th>
-                <th>REFERENCE ID</th>
-                <th>CHROMOSOME</th>
-                <th>CHROMOSOME POSITION</th>
+                <th class="text-center">RSID</th>
+                <th class="text-center">DISEASE TRAIT</th>
+                <th class="text-center">GENES</th>
+                <th class="text-center">REFERENCE ID</th>
+                <th class="text-center">CHROMOSOME</th>
+                <th class="text-center">CHROMOSOME POSITION</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +50,11 @@
             });
         });
     </script>
+    <style>
+        #items-table{
+        background-color:#eee;
+    }
+    </style>
 {% else %}
 <h1>You must be Logged in to see this site</h1>
 <a href="{% url 'login' %}">Login here</a>

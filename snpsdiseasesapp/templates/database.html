@@ -35,7 +35,7 @@
                             $('#Snp2Phenotype2Ref-table').dataTable({
                                 
                                 serverSide: true,
-                                sAjaxSource: "http://127.0.0.1:8000/database/Snp2Phenotype2Ref",  // new url
+                                sAjaxSource: "{% url 'Snp2Phenotype2Ref' %}",  // new url
                                                     columns: [
                                                         {name: "id", data: 0},
                                                         {name: "snp_id", data: 1},
@@ -74,7 +74,7 @@
                             $('#Snp-table').dataTable({
                                 
                                 serverSide: true,
-                                sAjaxSource: "http://127.0.0.1:8000/database/Snp",  // new url
+                                sAjaxSource: "{% url 'snp' %}",  // new url
                                                     columns: [
                                                         {name: "rsid", data: 0},
                                                         {name: "Chrom", data: 1},
@@ -110,7 +110,7 @@
                             $('#Reference-table').dataTable({
                                 
                                 serverSide: true,
-                                sAjaxSource: "http://127.0.0.1:8000/database/Reference",  // new url
+                                sAjaxSource: "{% url 'reference' %}",  // new url
                                                     columns: [
                                                         {name: "pubmedid", data: 0},
                                                         {name: "journal", data: 1},
@@ -143,7 +143,7 @@
                             $('#DiseaseTrait-table').dataTable({
                                 
                                 serverSide: true,
-                                sAjaxSource: "http://127.0.0.1:8000/database/DiseaseTrait",  // new url
+                                sAjaxSource: "{% url 'diseasetrait' %}",  // new url
                                                     columns: [
                                                         {name: "names", data: 0},
                                                     ],
@@ -173,7 +173,7 @@
                             $('#Genes-table').dataTable({
                                 
                                 serverSide: true,
-                                sAjaxSource: "http://127.0.0.1:8000/database/Genes",  // new url
+                                sAjaxSource: "{% url 'genes' %}",  // new url
                                                     columns: [
                                                         {name: "names", data: 0},
                                                     ],

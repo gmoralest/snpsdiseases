@@ -11,7 +11,7 @@ def login_users(request,):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        print(username)
+        print(username)     
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
@@ -127,7 +127,7 @@ def disease_search_result(request,):
     queryset = list(Snp2Phenotype2Ref.objects.filter(disease_trait_id = disease).values_list('snp_id', 'disease_trait_id','reference_id','pvalue','neg_log10_pvalue','comment'))
     data = []
     for element in queryset:
-        dico = {'snp_id':element[0], 'disease_trait_id':element[1],'reference_id':element[2],'pvalue':element[3],'neg_log10_pvalue':element[4],'comment':element[5]}
+        dico = {'snp_id':element[0], 'disease_trait_id':element[1],'reference_id':element[2],'pvalue': '{:.2e}'.format(element[3]),'neg_log10_pvalue':round(element[4], 2),'comment':element[5]}
         data.append(dico)
     context = {}
     context["disease"] = disease
