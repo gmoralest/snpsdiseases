@@ -4,7 +4,7 @@ from django.db import models
 class Snp(models.Model):
     rsid = models.IntegerField(primary_key=True)
     chrom = models.CharField(max_length= 50)
-    chrom_pos = models.CharField(max_length= 50)
+    chrom_pos = models.IntegerField(blank=True, null=True)
 
     class Meta:
         ordering = ['rsid']

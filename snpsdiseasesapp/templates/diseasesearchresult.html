@@ -2,31 +2,44 @@
 {% block content %}
 
 <main>
+
     <section class="hero text-center">
-        <h1> {{ disease }}</h1>
+        <a href="#" onclick="history.go(-1)"style="font-size:160%;color:white;" >New Search</a>
+        <h1 style="color:white;"> Search : {{ disease }}</h1>
     <hr>
     <table id="items-table" class="table table-striped table-bordered" style="width:70%">
         <thead>
             <tr>
-                <th>id</th>
-                <th>snp_id</th>
-                <th>disease_trait_id</th>
-                <th>reference_id</th>
-                <th>pvalue</th>
-                <th>neg_log10_pvalue</th>
-                <th>comment</th>
+                <th>RSID</th>
+                <th>DISEASE TRAIT</th>
+                <th>REFERENCE ID</th>
+                <th>P-value</th>
+                <th>-10LOG-value</th>
+                <th>COMMENTS</th>
             </tr>
         </thead>
         <tbody>
-            {% for pl in data %}
+            {% for entry in data %}
             <tr>
-              {% for l in pl%}
-                 <td>{{l}}</td>
-              {% endfor %} 
+     
+                 <td>{% url 'individualsnp' entry.snp_id as the_url %}<a href="{{ the_url }}">{{ entry.snp_id }}</a></td>
+                 <td>{{ entry.disease_trait_id }}</td>
+                 <td>{% url 'individualreference' entry.reference_id as the_url %}<a href="{{ the_url }}">{{ entry.reference_id }}</a></td>
+                 <td>{{ entry.pvalue }}</td>
+                 <td>{{ entry.neg_log10_pvalue }}</td>
+                 <td>{{ entry.comment }}</td>
             </tr>
             {% endfor %}
           </tbody>
-        </table>
+        </table >
+        <style>table{
+            margin: 0 auto;
+            width: 100%;
+            clear: both;
+            border-collapse: collapse;
+            table-layout: fixed; 
+            word-wrap:break-word; 
+          }</style>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script language="javascript">

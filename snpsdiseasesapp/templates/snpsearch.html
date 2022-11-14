@@ -7,31 +7,144 @@
                 <h1 class="hero-title h2-mobile mt-0 is-revealing">SNP search</h1>
                 <p class="hero-paragraph is-revealing">Bioinformatics tool to explore an SNPs Database.</p>
                 <div class="feature-extended-image is-revealing">
+                 
 
 
-<form id = "SnpForm" class = "form" action="homepage/Snpsearchresults/" method="GET">
+<form id = "SnpForm" class = "form" action="{% url 'snpsearchresult' %}" onsubmit="return validateForm()" method="GET">
     {% csrf_token %}
-<div>
-<label for="snp">Enter an Snp RSID</label>
+    <table>
+      <tr>
+        <td align="right"><label for="snp">Enter an Snp RSID</label></td>
+        <td align="left"><input type="text" name="snp" id="snp" value= '{% if submitbutton == "Submit" %} {{ snp }} {% endif %}'/></td>
+      </tr>
+      <tr>
+        <td align="right"><label for="snp">Enter a Chromosome number</label>    </td>
+        <td align="left"><input type="text" name="chrom" id="chrom" value= '{% if submitbutton == "Submit" %} {{ chrom }} {% endif %}'/>     </td>
+      </tr>
+      <tr>
+        <td align="right"><label for="snp">Enter a Chromosome start position</label>    </td>
+        <td align="left"><input type="text" name="chrom_pos_start" id="chrom_pos_start" value= '{% if submitbutton == "Submit" %} {{ chrom_pos_start }} {% endif %}' readonly/>     </td>
+      </tr>
+      <tr>
+        <td align="right" ><label for="snp" style="color:black">Enter a Chromosome end position</label>    </td>
+        <td align="left"><input type="text" name="chrom_pos_end" id="chrom_pos_end" value= '{% if submitbutton == "Submit" %} {{ chrom_pos_end }} {% endif %}'readonly/>     </td>
+      </tr>
+    </table>
+    <style>tr, td {border-style: none; border-top: 10px solid; border-bottom: 10px solid;border-color: transparent;}</style>
+
+<!-- <label for="snp">Enter an Snp RSID</label>
   <input type="text" name="snp" id="snp" value= '{% if submitbutton == "Submit" %} {{ snp }} {% endif %}'/>
-</div> 
-<div>
+
 <label for="snp">Enter a Chromosome number</label>
 <input type="text" name="chrom" id="chrom" value= '{% if submitbutton == "Submit" %} {{ chrom }} {% endif %}'/>
-</div> 
-<div>
-<label for="snp">Enter a Chromosome position</label>
-<input type="text" name="chrom_pos" id="chrom_pos" value= '{% if submitbutton == "Submit" %} {{ snp }} {% endif %}'/>
-</div> 
-<button type = "submit">submit</button>
+
+<label for="snp">Enter a Chromosome start position</label>
+<input type="text" name="chrom_pos_start" id="chrom_pos_start" value= '{% if submitbutton == "Submit" %} {{ chrom_pos_start }} {% endif %}' readonly/>
+
+  <label for="snp">Enter a Chromosome end position</label>
+  <input type="text" name="chrom_pos_end" id="chrom_pos_end" value= '{% if submitbutton == "Submit" %} {{ chrom_pos_end }} {% endif %}'readonly/> -->
+
+
+  <script>
+  function disableInput_snp(e) {
+    if(e.target.value !== 0) {
+       document.getElementById("chrom").readOnly = true;;
+       document.getElementById("chrom").value = ''
+       document.getElementById("chrom_pos_start").readOnly = true;
+       document.getElementById("chrom_pos_start").value = ''
+       document.getElementById("chrom_pos_end").readOnly = true;
+       document.getElementById("chrom_pos_end").value = ''
+     }  }
+  
+  function enableInput_snp(e) {
+    if(e.target.value == 0) {
+       document.getElementById("chrom").readOnly = false; 
+     }
+        }
+  
+  function disableInput_chrom(e) {
+    if(e.target.value !== 0) {
+       document.getElementById("snp").readOnly = true;
+       document.getElementById("snp").value = ''
+       document.getElementById("chrom_pos_start").readOnly = false;
+       document.getElementById("chrom_pos_end").readOnly = false;
+     }
+        }
+  
+  function enableInput_chrom(e) {
+    if(e.target.value == 0) {
+
+       document.getElementById("snp").readOnly = false;
+       document.getElementById("chrom_pos_start").readOnly = true;
+       document.getElementById("chrom_pos_start").value = ''
+       document.getElementById("chrom_pos_end").readOnly = true;
+       document.getElementById("chrom_pos_end").value = ''
+
+     }
+        }
+  
+  function pageshow_clear_inputs() {
+      document.getElementById("snp").value = '';
+      document.getElementById("chrom").value = '';
+      document.getElementById("chrom_pos_start").value = '';
+      document.getElementById("chrom_pos_end").value = '';
+     }
+  
+
+    
+const snp_input = document.getElementById('snp');
+snp_input.addEventListener('input', disableInput_snp);
+snp_input.addEventListener('input', enableInput_snp);
+
+const chrom_input = document.getElementById('chrom');
+chrom_input.addEventListener('input', disableInput_chrom);
+chrom_input.addEventListener('input', enableInput_chrom);
+
+// If the length of the element's string is 0 then display helper message 
+function validateForm() {
+    var a = document.getElementById("snp");
+    var b = document.getElementById("chrom");
+    var c = document.getElementById("chrom_pos_start");
+    var d = document.getElementById("chrom_pos_end");
+
+    if ((a.value == null || a.value == "" || isNaN(a.value)) && (b.value == null || b.value == "")) {
+      alert("Please Fill All Required Field");
+      return false;
+    }
+
+    if (((isNaN(c.value))) || (isNaN(d.value))){
+      if ((c.value == null || c.value == "") || (d.value == null || d.value == "")){
+        return true;
+      }
+      else {
+      alert("Please Fill the fields just with numbers");
+      return false;
+      }
+    }
+    
+    return true;
+  }
+
+function reset_Values(event){
+  document.getElementById("snp").readOnly = false;
+  document.getElementById("chrom").readOnly = false;
+}
+
+const reset = document.getElementById('SnpForm');
+reset.addEventListener('reset', reset_Values);
+
+</script>
+<input type="reset" value="Clear" id = "reset">
+<button type = "submit" id = "submit_button">Submit</button>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
+
   $(function () {
         $("#snp").autocomplete({
             minLength: 4,
-            source: '{% url 'autocomplete_snp' %}'
+            source: "{% url 'autocomplete_snp' %}",
             
         });
     });

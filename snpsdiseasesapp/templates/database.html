@@ -1,10 +1,8 @@
 {% extends "base.html" %}
     {% block content %}
-        <main>
-             <!-- Tab links -->
-                
-            <section class="hero text-center">
-            <h1>COMPLETE DATABASE</h1>   
+        <main>                
+             <section class="hero text-center">
+            <h1 class="hero-title h2-mobile mt-0 is-revealing" style="color:white;">COMPLETE DATABASE</h1>   
             <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'Snp2Phenotype2Ref')"  id="defaultOpen">Snp2Phenotype2Ref</button>
                     <button class="tablinks" onclick="openTab(event, 'Snp')">SNPs</button>
@@ -12,21 +10,19 @@
                     <button class="tablinks" onclick="openTab(event, 'DiseaseTrait')">DiseaseTrait</button>
                     <button class="tablinks" onclick="openTab(event, 'Genes')">Genes</button>
                 </div>
-                
-                <!-- Tab content -->
                 <div id="Snp2Phenotype2Ref" class="tabcontent">
-                    <h2>Snp2Phenotype2Ref</h2>
+                    <h2 style="color:white;">Snp2Phenotype2Ref</h2>
                     <hr>
                     <table class = display id="Snp2Phenotype2Ref-table">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>snp_id</th>
-                                <th>disease_trait_id</th>
-                                <th>reference_id</th>
-                                <th>pvalue</th>
-                                <th>neg_log10_pvalue</th>
-                                <th>comment</th>
+                                <th>ENTRY ID</th>
+                                <th>RSID</th>
+                                <th>DISEASE TRAIT</th>
+                                <th>REFERENCE ID</th>
+                                <th>P-value</th>
+                                <th>-10LOG-value</th>
+                                <th>COMMENTS</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -58,15 +54,14 @@
                 </div>
                 
                 <div id="Snp" class="tabcontent">
-                    <h2>SNPs</h2>
+                    <h2 style="color:white;">SNPs</h2>
                     <hr>
                     <table class = display id="Snp-table">
                         <thead>
                             <tr>
-                                <th>Rsid</th>
-                                <th>Chrom</th>
-                                <th>Chrom_pos</th>
-                                
+                                <th>RSID</th>
+                                <th>CHROMOSOME</th>
+                                <th>CHROMOSOME POSITION</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -92,7 +87,7 @@
                 </div>
                 
                 <div id="Reference" class="tabcontent">
-                    <h2>References</h2>
+                    <h2 style="color:white;">References</h2>
                     <hr>
                     <table class = display id="Reference-table">
                         <thead>
@@ -130,7 +125,7 @@
                 </div>
 
                 <div id="DiseaseTrait" class="tabcontent">
-                    <h2>DiseaseTrait</h2>
+                    <h2 style="color:white;">DiseaseTrait</h2>
                     <hr>
                     <table class = display id="DiseaseTrait-table">
                         <thead>
@@ -159,7 +154,7 @@
                 </div>
             
                 <div id="Genes" class="tabcontent">
-                    <h2>Genes</h2>
+                    <h2 style="color:white;">Genes</h2>
                     <hr>
                     <table class = display id="Genes-table">
                         <thead>
@@ -214,8 +209,6 @@
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();
             </script>   
-                 
-
             </section>
         </main>
     {% endblock %}

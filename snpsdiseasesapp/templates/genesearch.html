@@ -4,61 +4,48 @@
         <section class="hero text-light text-center">
             <div class="container-sm">
                 <div class="hero-inner">
+                    {% if user.is_authenticated %}
                     <h1 class="hero-title h2-mobile mt-0 is-revealing">Gene search (BETA)</h1>
                     <p class="hero-paragraph is-revealing">Bioinformatics tool to explore an SNPs Database.</p>
                     <div class="feature-extended-image is-revealing">
-    <form>
-      <label for="gene">Product</label>
-      <input type="text" name="gene" id="gene">
-    </form>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-      $(function () {
-            $("#gene").autocomplete({
-                minLength: 4,
-                source: '{% url 'autocomplete_gene' %}'
-            });
-        });
-      </script>
-        
-        <section class="hero text-center">
-            <h1>Items</h1>
-            <hr>
-            <table class = display id="items-table">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>snp_id</th>
-                        <th>disease_trait_id</th>
-                        <th>reference_id</th>
-                        <th>pvalue</th>
-                        <th>neg_log10_pvalue</th>
-                        <th>comment</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-            <script language="javascript">
-                $(document).ready(function () {
-                    $('#items-table').dataTable({
-                        serverSide: true,
-                        sAjaxSource: "http://127.0.0.1:8000/data/",  // new url
-                                            columns: [
-                                                {name: "id", data: 0},
-                                                {name: "snp_id", data: 1},
-                                                {name: "disease_trait_id", data: 2},
-                                                {name: "reference_id", data: 3},
-                                                {name: "pvalue", data: 4},
-                                                {name: "neg_log10_pvalue", data: 5},
-                                                {name: "comment", data: 6},
-                                                
-                                            ],
-                    });
-                });
-            </script>
-        </section>
-       
-        </main>
+                        <form id = "diseaseForm" class = "form" action="{% url 'genesearchresult' %}" onsubmit="return validateForm()" method="GET">
+                            {% csrf_token %}
+                              <p>
+                              <label for="disease">Enter a Gene </label>
+                              <input type="text" name="gene" id="gene" value= '{% if submitbutton == "Submit" %} {{ gene }} {% endif %}'/>
+                              </p>
+                              <p>
+                              <input type="reset" value="Clear" id = "reset">
+                              <button type = "submit">submit</button>
+                              </p>
+                            </form>
+                            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                            <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+                            <script>
+                              $(function () {
+                                    $("#gene").autocomplete({
+                                        minLength: 2,
+                                        source: "{% url 'autocomplete_gene' %}",
+                                    });
+                                });
+                            
+                              </script>
+                            
+                             <script>
+                            function validateForm() {
+                                var a = document.getElementById("gene");
+                                if (a.value == null || a.value == "" ) {
+                                  alert("Please Fill All Required Field");
+                                  return false;
+                                }
+                              }
+                            
+                             </script>
+                            {% else %}
+                            <h1>You must be Logged in to see this site</h1>
+                            <a href="{% url 'login' %}">Login here</a> or <a href="{% url 'register_user' %}">Sign up here</a>
+                            {% endif %}
+                            </section>
+                            </main>
+                            
     {% endblock %}

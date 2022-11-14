@@ -1,0 +1,29 @@
+
+    {% extends "base.html" %}
+    {% block content %}
+    <main>
+        {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            There was an error at the registration
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>       
+        {% endif %}
+        <div class = "shadow p-4 mb-5 bg-body rounded">
+        <section class="hero text-light text-center">
+        <h2>Register User</h2>
+      <form action="{% url 'register_user' %}" method="post" id = 'register_form'>
+        {% csrf_token %}
+        {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+      <script>
+
+        var element = document.getElementById("register_form");
+        element.style.color = "#000000";
+        </script>
+      </section>
+    </main>
+    {% endblock %}
